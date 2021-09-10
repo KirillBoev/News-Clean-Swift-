@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "NewsListViewController.tableView(_:numberOfRowsInSection:):NewsListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "news.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

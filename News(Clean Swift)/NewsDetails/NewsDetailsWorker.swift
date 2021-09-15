@@ -14,6 +14,6 @@ import UIKit
 
 class NewsDetailsWorker {
     func fetchImage(from imageURL: String?) -> Data? {
-        ImageManager.shared.getImageData(from: imageURL)
+        ImageManager.getImageData(from: imageURL)
     }
 }

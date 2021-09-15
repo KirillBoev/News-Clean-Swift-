@@ -19,17 +19,32 @@ protocol NewsDetailsDisplayLogic: class {
 class NewsDetailsViewController: UIViewController {
     
     
-    //@IBOutlet private var nameTextField: UITextField!
+    let detailView = DetailNewsView()
     
     var interactor: NewsDetailsBusinessLogic?
     var router: (NSObjectProtocol & NewsDetailsRoutingLogic & NewsDetailsDataPassing)?
     
+    // MARK: Object lifecycle
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        NewsDetailsConfigurator.counfure(with: self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NewsDetailsConfigurator.counfure(with: self)
+    }
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewsDetailsConfigurator.shared.counfure(with: self)
+        view.addSubview(detailView)
         showDetails()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        detailView.frame = view.bounds
     }
     
     // MARK: Routing
@@ -54,14 +69,11 @@ class NewsDetailsViewController: UIViewController {
 extension NewsDetailsViewController: NewsDetailsDisplayLogic {
     
     func displayDetails(viewModel: NewsDetails.ShowDetails.ViewModel) {
-//        courseNameLabel.text = viewModel.displayedDetails.courseName
-//        numberOfLessonsLabel.text = viewModel.displayedDetails.numberOfLessons
-//        numberOfTestsLabel.text = viewModel.displayedDetails.numberOfTests
-//
-//        guard let image = viewModel.displayedDetails.imageData else { return }
-//        courseImage.image = UIImage(data: image)
-//
-//        let favouriteImage = viewModel.displayedDetails.isFavourite ? #imageLiteral(resourceName: "heartIcon") : #imageLiteral(resourceName: "unselectedHeart")
-//        favouriteButton.setImage(favouriteImage, for: .normal)
+        detailView.courseNameLabel.text = viewModel.displayedDetails.courseName
+        detailView.numberOfLessonsLabel.text = viewModel.displayedDetails.numberOfLessons
+        detailView.numberOfTestsLabel.text = viewModel.displayedDetails.numberOfTests
+
+        guard let image = viewModel.displayedDetails.imageData else { return }
+        detailView.courseImage.image = UIImage(data: image)
     }
 }

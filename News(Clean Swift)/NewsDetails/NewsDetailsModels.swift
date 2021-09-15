@@ -25,11 +25,10 @@ enum NewsDetails {
         
         struct ViewModel {
             struct DisplayedDetails {
-                var title: String?
-                var description: String?
-                var urlToImage: String?
-                var content: String?
-                var publishedAt: String?
+                let courseName: String?
+                let numberOfLessons: String?
+                let numberOfTests: String?
+                let imageData: Data?
             }
             
             let displayedDetails: DisplayedDetails

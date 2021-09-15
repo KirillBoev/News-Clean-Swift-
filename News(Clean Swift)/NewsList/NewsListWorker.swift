@@ -12,27 +12,28 @@
 
 import UIKit
 
-class NewsListWorker {
-    func getDisplayedNews(from news: [News]) -> [NewsList.FetchNews.ViewModel.DisplayedNews] {
-        
-        var displayedNews: [NewsList.FetchNews.ViewModel.DisplayedNews] = []
-        
-        news.forEach { news in
-            let title = news.title
-            let imageData = fetchImage(from: news.urlToImage)
-            
-            let displayedNew = NewsList.FetchNews.ViewModel.DisplayedNews(
-                title: title,
-                imageData: imageData
-            )
-            
-            displayedNews.append(displayedNew)
-        }
-        
-        return displayedNews
-    }
+protocol NewsListWorkerLogic: class {
+    func fetchNews(completion: @escaping (_ courses: [News])->())
+}
+
+class NewsListWorker: NewsListWorkerLogic {
     
-    private func fetchImage(from imageURL: String?) -> Data? {
-        ImageManager.shared.getImageData(from: imageURL)
-    }
+    func fetchNews(completion: @escaping (_ courses: [News])->()) {
+            let urlString = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
+            guard let url = URL(string: urlString) else { return }
+            
+            URLSession.shared.dataTask(with: url) { (data, _, _) in
+                guard let data = data else { return }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let courses = try decoder.decode([News].self, from: data)
+                    completion(courses)
+                } catch let error {
+                    print("Error serialization json", error)
+                }
+                
+            }.resume()
+        }
 }

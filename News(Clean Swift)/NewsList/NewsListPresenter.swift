@@ -19,13 +19,13 @@ protocol NewsListPresentationLogic {
 class NewsListPresenter: NewsListPresentationLogic {
     
     weak var viewController: NewsListDisplayLogic?
-    var worker: NewsListWorker?
+    var interactor: NewsListInteractor?
     
     // MARK: Do something
     
     func presentNews(response: NewsList.FetchNews.Response) {
-        worker = NewsListWorker()
-        guard let displayedNews = worker?.getDisplayedNews(from: response.news) else { return }
+        interactor = NewsListInteractor()
+        guard let displayedNews = interactor?.getDisplayedNews(from: response.news) else { return }
         let viewModel = NewsList.FetchNews.ViewModel(displayedNews: displayedNews)
         viewController?.displayNews(viewModel: viewModel)
     }

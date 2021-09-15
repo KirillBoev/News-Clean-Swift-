@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B5A554D26F0CCC400875F30 /* DetailNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A554C26F0CCC400875F30 /* DetailNewsView.swift */; };
 		7B6425A526E63E7100AFA254 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6425A426E63E7100AFA254 /* AppDelegate.swift */; };
 		7B6425A726E63E7100AFA254 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6425A626E63E7100AFA254 /* SceneDelegate.swift */; };
 		7B6425AE26E63E7400AFA254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B6425AD26E63E7400AFA254 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B5A554C26F0CCC400875F30 /* DetailNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNewsView.swift; sourceTree = "<group>"; };
 		7B6425A126E63E7100AFA254 /* News(Clean Swift).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News(Clean Swift).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6425A426E63E7100AFA254 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B6425A626E63E7100AFA254 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				7B6425A626E63E7100AFA254 /* SceneDelegate.swift */,
 				7B6425AD26E63E7400AFA254 /* Assets.xcassets */,
 				7B6425B226E63E7400AFA254 /* Info.plist */,
+				7B5A554C26F0CCC400875F30 /* DetailNewsView.swift */,
 			);
 			path = "News(Clean Swift)";
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				7B6988B426EA3744009A6040 /* NewsListConfigurator.swift in Sources */,
 				7B6988BF26EA558B009A6040 /* ImageManager.swift in Sources */,
 				7B6425A526E63E7100AFA254 /* AppDelegate.swift in Sources */,
+				7B5A554D26F0CCC400875F30 /* DetailNewsView.swift in Sources */,
 				7B6425D126E63EF800AFA254 /* NewsDetailsModels.swift in Sources */,
 				7B6988B026EA1C89009A6040 /* News.swift in Sources */,
 				7BC3B60626EB5752000539E4 /* NewsListTableViewCell.swift in Sources */,

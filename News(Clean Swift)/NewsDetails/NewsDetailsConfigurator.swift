@@ -9,9 +9,7 @@ import Foundation
 
 class NewsDetailsConfigurator {
     
-    static let shared = NewsDetailsConfigurator()
-    
-    func counfure(with view: NewsDetailsViewController) {
+    static func counfure(with view: NewsDetailsViewController) {
         let viewController = view
         let interactor = NewsDetailsInteractor()
         let presenter = NewsDetailsPresenter()

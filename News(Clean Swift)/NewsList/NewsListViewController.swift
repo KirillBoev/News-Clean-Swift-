@@ -21,7 +21,7 @@ class NewsListViewController: UIViewController {
     let tableView = UITableView()
     
     var interactor: NewsListBusinessLogic?
-    var router: (NSObjectProtocol & NewsListRoutingLogic & NewsListDataPassing)?
+    var router: NewsListRoutingLogic?
     
     private var news: [NewsList.FetchNews.ViewModel.DisplayedNews] = []
     
@@ -29,7 +29,8 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewsListConfigurator.shared.counfure(with: self)
+        navigationItem.title = "News"
+        NewsListConfigurator.counfure(with: self)
         getNews()
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -41,17 +42,6 @@ class NewsListViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
-    }
-    
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
     }
     
     // MARK: Do something
@@ -68,9 +58,10 @@ extension NewsListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewsListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let new = news[indexPath.row]
-        cell.configure(with: new)
+        cell.textLabel?.text = new.title
+        cell.imageView?.image = UIImage(data: new.imageData!)
         return cell
     }
 }
@@ -81,7 +72,7 @@ extension NewsListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        router?.navigateToPushedViewController(vm: news[indexPath.row])
     }
 }
 

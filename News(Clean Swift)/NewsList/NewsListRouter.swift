@@ -12,8 +12,8 @@
 
 import UIKit
 
-@objc protocol NewsListRoutingLogic {
-    func routeToNewsDetails(segue: UIStoryboardSegue?)
+protocol NewsListRoutingLogic {
+    func navigateToPushedViewController(vm: NewsList.FetchNews.ViewModel.DisplayedNews)
 }
 
 protocol NewsListDataPassing {
@@ -27,30 +27,9 @@ class NewsListRouter: NSObject, NewsListRoutingLogic, NewsListDataPassing {
     
     // MARK: Routing
     
-    func routeToNewsDetails(segue: UIStoryboardSegue?) {
-        if let segue = segue {
-            let destinationVC = segue.destination as! NewsDetailsViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToNewsDetails(source: dataStore!, destination: &destinationDS)
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let destinationVC = storyboard.instantiateViewController(withIdentifier: "NewsDetailsViewController") as! NewsDetailsViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToNewsDetails(source: dataStore!, destination: &destinationDS)
-            navigateToNewsDetails(source: viewController!, destination: destinationVC)
-        }
-    }
-    
-    // MARK: Navigation
-    
-    func navigateToNewsDetails(source: NewsListViewController, destination: NewsDetailsViewController) {
-        source.show(destination, sender: nil)
-    }
-    
-    // MARK: Passing data
-    
-    func passDataToNewsDetails(source: NewsListDataStore, destination: inout NewsDetailsDataStore) {
-        guard let indexPath = viewController?.tableView.indexPathForSelectedRow else { return }
-        destination.news = source.news[indexPath.row]
+    func navigateToPushedViewController(vm: NewsList.FetchNews.ViewModel.DisplayedNews) {
+//        let pushedViewController = NewsDetailsViewController()
+//                pushedViewController.configure(viewModel: vm)
+//                viewController?.navigationController?.pushViewController(pushedViewController, animated: true)
     }
 }

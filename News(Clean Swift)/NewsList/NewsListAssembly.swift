@@ -1,24 +1,25 @@
 //
-//  NewsDetailsConfigurator.swift
+//  NewsListConfigurator.swift
 //  News(Clean Swift)
 //
 //  Created by Kirill Boev on 09.09.2021.
 //
 
-import Foundation
+import UIKit
 
-class NewsDetailsConfigurator {
+class NewsListAssembly {
     
-    static func counfure(with view: NewsDetailsViewController) {
-        let viewController = view
-        let interactor = NewsDetailsInteractor()
-        let presenter = NewsDetailsPresenter()
-        let router = NewsDetailsRouter()
+    static func build() -> UIViewController {
+        let viewController = NewsListViewController()
+        let interactor = NewsListInteractor()
+        let presenter = NewsListPresenter()
+        let router = NewsListRouter()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
+        return viewController
     }
 }

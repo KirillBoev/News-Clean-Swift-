@@ -16,9 +16,9 @@ protocol NewsListDisplayLogic: class {
     func displayNews(viewModel: NewsList.FetchNews.ViewModel)
 }
 
-class NewsListViewController: UIViewController {
+final class NewsListViewController: UIViewController {
     
-    let tableView = UITableView()
+    private let tableView = UITableView()
     
     var interactor: NewsListBusinessLogic?
     var router: NewsListRoutingLogic?
@@ -30,13 +30,8 @@ class NewsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "News"
-        NewsListConfigurator.counfure(with: self)
         getNews()
-        view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        
+        setupTableView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,6 +44,13 @@ class NewsListViewController: UIViewController {
     func getNews() {
         let request = NewsList.FetchNews.Request()
         interactor?.fetchNews(request: request)
+    }
+    
+    func setupTableView(){
+        view.addSubview(tableView)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 }
 
@@ -72,7 +74,7 @@ extension NewsListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router?.navigateToPushedViewController(vm: news[indexPath.row])
+        router?.routeToDetailNews(indexOfNews: indexPath.row)
     }
 }
 

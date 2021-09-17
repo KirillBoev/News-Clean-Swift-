@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailNewsView: UIView {
+final class DetailNewsView: UIView {
     
     var courseNameLabel = UILabel()
     var numberOfLessonsLabel = UILabel()
@@ -24,7 +24,6 @@ class DetailNewsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupView() {
         addSubview(courseNameLabel)
         
@@ -36,7 +35,6 @@ class DetailNewsView: UIView {
         courseImage.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         courseImage.contentMode = .scaleAspectFit
         courseImage.clipsToBounds = true
-        
     }
     
     override func layoutIfNeeded() {
@@ -67,5 +65,4 @@ class DetailNewsView: UIView {
             numberOfTestsLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10)
         ])
     }
-    
 }

@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         window.makeKeyAndVisible()
-        let controller = NewsListViewController()
+        let controller = NewsListAssembly.build()
         let navController = UINavigationController(rootViewController: controller)
         window.rootViewController = navController
         self.window = window

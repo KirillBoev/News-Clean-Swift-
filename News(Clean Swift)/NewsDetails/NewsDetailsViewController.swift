@@ -16,7 +16,7 @@ protocol NewsDetailsDisplayLogic: class {
     func displayDetails(viewModel: NewsDetails.ShowDetails.ViewModel)
 }
 
-class NewsDetailsViewController: UIViewController {
+final class NewsDetailsViewController: UIViewController {
     
     
     let detailView = DetailNewsView()
@@ -24,16 +24,6 @@ class NewsDetailsViewController: UIViewController {
     var interactor: NewsDetailsBusinessLogic?
     var router: (NSObjectProtocol & NewsDetailsRoutingLogic & NewsDetailsDataPassing)?
     
-    // MARK: Object lifecycle
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        NewsDetailsConfigurator.counfure(with: self)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        NewsDetailsConfigurator.counfure(with: self)
-    }
     // MARK: View lifecycle
     
     override func viewDidLoad() {

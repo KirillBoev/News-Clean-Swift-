@@ -20,16 +20,18 @@ protocol NewsDetailsDataStore {
     var news: News! { get set }
 }
 
-class NewsDetailsInteractor: NewsDetailsBusinessLogic, NewsDetailsDataStore {
+final class NewsDetailsInteractor: NewsDetailsBusinessLogic, NewsDetailsDataStore {
     
     var presenter: NewsDetailsPresentationLogic?
-    var worker: NewsDetailsWorker?
     var news: News!
+    
+    init(news: News) {
+        self.news = news
+    }
     
     // MARK: Do something
     
     func showDetails(request: NewsDetails.ShowDetails.Request) {
-        worker = NewsDetailsWorker()
         let response = NewsDetails.ShowDetails.Response(news: news)
         presenter?.presentDetails(response: response)
     }

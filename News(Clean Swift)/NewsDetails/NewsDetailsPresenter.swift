@@ -16,21 +16,21 @@ protocol NewsDetailsPresentationLogic {
     func presentDetails(response: NewsDetails.ShowDetails.Response)
 }
 
-class NewsDetailsPresenter: NewsDetailsPresentationLogic {
+final class NewsDetailsPresenter: NewsDetailsPresentationLogic {
     
     weak var viewController: NewsDetailsDisplayLogic?
-    var worker: NewsDetailsWorker?
+    var worker: NewsListWorkerLogic?
     
     // MARK: Do something
     
     func presentDetails(response: NewsDetails.ShowDetails.Response) {
-        worker = NewsDetailsWorker()
+        worker = NewsListWorker()
         
-//        let numberOfLessons = "Number of lesson: \(response.news.numberOfLessons ?? 0)"
-//        let numberOfTests = "Number of tests: \(response.news.numberOfTests ?? 0)"
-//        let imageData = worker?.fetchImage(from: response.news.imageUrl)
-//        let displayedDetails = NewsDetails.ShowDetails.ViewModel.DisplayedDetails
-//        let viewModel = NewsDetails.ShowDetails.ViewModel(displayedDetails: displayedDetails)
-//        viewController?.displayNews(viewModel: viewModel)
+        let numberOfLessons = "Number of lesson: \(response.news.numberOfLessons ?? 0)"
+        let numberOfTests = "Number of tests: \(response.news.numberOfTests ?? 0)"
+        let imageData = worker?.getImageData(from: response.news.imageUrl)
+        let displayedDetails = NewsDetails.ShowDetails.ViewModel.DisplayedDetails(courseName: response.news.name, numberOfLessons: numberOfLessons, numberOfTests: numberOfTests, imageData: imageData)
+        let viewModel = NewsDetails.ShowDetails.ViewModel(displayedDetails: displayedDetails)
+        viewController?.displayDetails(viewModel: viewModel)
     }
 }

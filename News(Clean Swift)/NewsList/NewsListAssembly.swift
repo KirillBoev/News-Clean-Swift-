@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsListAssembly {
+final class NewsListAssembly {
     
     static func build() -> UIViewController {
         let viewController = NewsListViewController()

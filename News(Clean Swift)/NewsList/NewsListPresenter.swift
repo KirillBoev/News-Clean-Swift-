@@ -16,7 +16,7 @@ protocol NewsListPresentationLogic {
     func presentNews(response: NewsList.FetchNews.Response)
 }
 
-class NewsListPresenter: NewsListPresentationLogic {
+final class NewsListPresenter: NewsListPresentationLogic {
     
     weak var viewController: NewsListDisplayLogic?
     var interactor: NewsListInteractor?

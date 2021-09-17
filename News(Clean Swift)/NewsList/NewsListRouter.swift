@@ -13,23 +13,23 @@
 import UIKit
 
 protocol NewsListRoutingLogic {
-    func navigateToPushedViewController(vm: NewsList.FetchNews.ViewModel.DisplayedNews)
+    func routeToDetailNews(indexOfNews: Int)
 }
 
 protocol NewsListDataPassing {
     var dataStore: NewsListDataStore? { get }
 }
 
-class NewsListRouter: NSObject, NewsListRoutingLogic, NewsListDataPassing {
+final class NewsListRouter: NSObject, NewsListRoutingLogic, NewsListDataPassing {
     
     weak var viewController: NewsListViewController?
     var dataStore: NewsListDataStore?
     
     // MARK: Routing
     
-    func navigateToPushedViewController(vm: NewsList.FetchNews.ViewModel.DisplayedNews) {
-//        let pushedViewController = NewsDetailsViewController()
-//                pushedViewController.configure(viewModel: vm)
-//                viewController?.navigationController?.pushViewController(pushedViewController, animated: true)
+    func routeToDetailNews(indexOfNews: Int) {
+        guard let news = dataStore?.news[indexOfNews] else { return }
+        let pushedViewController = NewsDetailsAssembly.build(news: news)
+        viewController?.navigationController?.pushViewController(pushedViewController, animated: true)
     }
 }

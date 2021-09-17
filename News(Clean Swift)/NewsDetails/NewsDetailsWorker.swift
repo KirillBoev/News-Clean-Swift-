@@ -12,8 +12,6 @@
 
 import UIKit
 
-class NewsDetailsWorker {
-    func fetchImage(from imageURL: String?) -> Data? {
-        ImageManager.getImageData(from: imageURL)
-    }
+final class NewsDetailsWorker {
+    
 }

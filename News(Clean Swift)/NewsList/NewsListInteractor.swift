@@ -20,7 +20,7 @@ protocol NewsListDataStore {
     var news: [News] { get }
 }
 
-class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
+final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
     
     var presenter: NewsListPresentationLogic?
     var worker: NewsListWorkerLogic?
@@ -48,7 +48,8 @@ class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
     }
     
     private func fetchImage(from imageURL: String?) -> Data? {
-        ImageManager.getImageData(from: imageURL)
+        worker = NewsListWorker()
+        return worker?.getImageData(from: imageURL)
     }
     
     func fetchNews(request: NewsList.FetchNews.Request) {

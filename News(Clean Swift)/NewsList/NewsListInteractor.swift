@@ -25,6 +25,7 @@ final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
     var presenter: NewsListPresentationLogic?
     var worker: NewsListWorkerLogic?
     var news: [News] = []
+    var dataIsEmpty = false
     
     // MARK: Do something
     
@@ -43,8 +44,16 @@ final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
             
             displayedNews.append(displayedNew)
         }
-        
+        dataChecking(news: displayedNews)
         return displayedNews
+    }
+    
+    func dataChecking(news: [NewsList.FetchNews.ViewModel.DisplayedNews]) {
+        if news.isEmpty {
+            dataIsEmpty = true
+        } else {
+            dataIsEmpty = false
+        }
     }
     
     private func fetchImage(from imageURL: String?) -> Data? {

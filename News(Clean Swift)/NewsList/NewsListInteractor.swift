@@ -44,17 +44,17 @@ final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
             
             displayedNews.append(displayedNew)
         }
-        dataChecking(news: displayedNews)
+//        dataChecking(news: displayedNews)
         return displayedNews
     }
     
-    func dataChecking(news: [NewsList.FetchNews.ViewModel.DisplayedNews]) {
-        if news.isEmpty {
-            dataIsEmpty = true
-        } else {
-            dataIsEmpty = false
-        }
-    }
+//    func dataChecking(news: [NewsList.FetchNews.ViewModel.DisplayedNews]) {
+//        if news.isEmpty {
+//            dataIsEmpty = true
+//        } else {
+//            dataIsEmpty = false
+//        }
+//    }
     
     private func fetchImage(from imageURL: String?) -> Data? {
         worker = NewsListWorker()
@@ -62,11 +62,15 @@ final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
     }
     
     func fetchNews(request: NewsList.FetchNews.Request) {
-        worker = NewsListWorker()
-        worker?.fetchNews { news in
-            self.news = news
-            let response = NewsList.FetchNews.Response(news: news)
-            self.presenter?.presentNews(response: response)
+        if dataIsEmpty {
+            self.presenter?.presentError()
+        } else {
+            worker = NewsListWorker()
+            worker?.fetchNews { news in
+                self.news = news
+                let response = NewsList.FetchNews.Response(news: news)
+                self.presenter?.presentNews(response: response)
+            }
         }
     }
 }

@@ -14,14 +14,20 @@ import UIKit
 
 protocol NewsListPresentationLogic {
     func presentNews(response: NewsList.FetchNews.Response)
+    func presentError()
 }
 
-final class NewsListPresenter: NewsListPresentationLogic {
+class NewsListPresenter: NewsListPresentationLogic {
     
     weak var viewController: NewsListDisplayLogic?
     var interactor: NewsListInteractor?
     
     // MARK: Do something
+    
+    func presentError() {
+        let viewModel = NewsList.FetchNews.ViewModel(displayedNews: [])
+        viewController?.displayNews(viewModel: viewModel)
+    }
     
     func presentNews(response: NewsList.FetchNews.Response) {
         interactor = NewsListInteractor()

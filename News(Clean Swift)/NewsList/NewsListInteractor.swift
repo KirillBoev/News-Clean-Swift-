@@ -44,17 +44,8 @@ final class NewsListInteractor: NewsListBusinessLogic, NewsListDataStore {
             
             displayedNews.append(displayedNew)
         }
-//        dataChecking(news: displayedNews)
         return displayedNews
     }
-    
-//    func dataChecking(news: [NewsList.FetchNews.ViewModel.DisplayedNews]) {
-//        if news.isEmpty {
-//            dataIsEmpty = true
-//        } else {
-//            dataIsEmpty = false
-//        }
-//    }
     
     private func fetchImage(from imageURL: String?) -> Data? {
         worker = NewsListWorker()

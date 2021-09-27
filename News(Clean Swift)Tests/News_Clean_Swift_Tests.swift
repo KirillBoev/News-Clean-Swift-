@@ -8,14 +8,15 @@
 import XCTest
 @testable import News_Clean_Swift_
 
-class NewsListPresenterSpy: NewsListPresenter {
-    var lastResult: Int?
-    override func presentNews(response: NewsList.FetchNews.Response) {
-        lastResult = 1
+class NewsListPresenterSpy: NewsListPresentationLogic {
+    var isPresentNewsCalled = false
+    var isPresentErrorCalled = false
+    func presentNews(response: NewsList.FetchNews.Response) {
+        isPresentNewsCalled = true
     }
     
-    override func presentError() {
-        lastResult = 0
+    func presentError() {
+        isPresentErrorCalled = true
     }
 }
 
@@ -25,19 +26,23 @@ class NewsListInteractorTests: XCTestCase {
     private var presenter: NewsListPresenterSpy!
 
     override func setUp() {
+        super.setUp()
         sut = NewsListInteractor()
         presenter = NewsListPresenterSpy()
         sut.presenter = presenter
-    }
-
-    override func tearDownWithError() throws {
-        super.tearDown()
     }
     
     func testDataIsEmpty() {
         sut.dataIsEmpty = true
         let request = NewsList.FetchNews.Request()
         sut.fetchNews(request: request)
-        XCTAssertEqual(presenter.lastResult, 0)
+        XCTAssertTrue(presenter.isPresentErrorCalled)
+    }
+    
+    func testDataIsNotEmpty() {
+        sut.dataIsEmpty = false
+        let request = NewsList.FetchNews.Request()
+        sut.fetchNews(request: request)
+        XCTAssertFalse(presenter.isPresentNewsCalled)
     }
 }
